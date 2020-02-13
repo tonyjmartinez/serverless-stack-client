@@ -1,18 +1,44 @@
-export default {
+const dev = {
   STRIPE_KEY: "pk_test_fubM7gUZUUtwBedN1dACYzPR",
-  MAX_ATTACHMENT_SIZE: 5000000,
   s3: {
     REGION: "us-east-1",
-    BUCKET: "notes-app-bucket-tony-m"
+    BUCKET: "notes-app-2-api-dev-attachmentsbucket-s84vq1ntaszk"
   },
   apiGateway: {
     REGION: "us-east-1",
-    URL: "https://ivtb1b5pnf.execute-api.us-east-1.amazonaws.com/prod"
+    URL: "https://api.blogplusminus.com/dev"
   },
   cognito: {
-    REGION: "ca-central-1",
-    USER_POOL_ID: "ca-central-1_py7b6V72w",
-    APP_CLIENT_ID: "4b2d3mukq02l7e4g2p1qc5jmor",
-    IDENTITY_POOL_ID: "ca-central-1:27d81374-030d-431b-918d-8dd7f11f87af"
+    REGION: "us-east-1",
+    USER_POOL_ID: "us-east-1_nMPBxIMMo",
+    APP_CLIENT_ID: "5p9tnib8nml9t881717np4neln",
+    IDENTITY_POOL_ID: "us-east-1:b913e60d-fc31-42ff-86f1-e4a13121ff01"
   }
+};
+
+const prod = {
+  STRIPE_KEY: "pk_test_fubM7gUZUUtwBedN1dACYzPR",
+  s3: {
+    REGION: "us-east-1",
+    BUCKET: "notes-app-2-api-prod-attachmentsbucket-1xs2y6hc90k56"
+  },
+  apiGateway: {
+    REGION: "us-east-1",
+    URL: "https://api.blogplusminus.com/prod"
+  },
+  cognito: {
+    REGION: "us-east-1",
+    USER_POOL_ID: "us-east-1_1iVf9mSC2",
+    APP_CLIENT_ID: "6r5v5p6gaadgd2hgnpvbjc3haf",
+    IDENTITY_POOL_ID: "us-east-1:b1decc58-47ed-4ac7-941b-eb9b304c7e2d"
+  }
+};
+
+// Default to dev if not set
+const config = process.env.REACT_APP_STAGE === "prod" ? prod : dev;
+
+export default {
+  // Add common config values here
+  MAX_ATTACHMENT_SIZE: 5000000,
+  ...config
 };
